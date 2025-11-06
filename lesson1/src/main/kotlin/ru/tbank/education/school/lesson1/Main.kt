@@ -1,5 +1,5 @@
 package ru.tbank.education.school.lesson1
 
 fun main() {
-    print("werewrw3")
+    print("weredwdw3")
 }
