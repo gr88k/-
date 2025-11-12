@@ -13,3 +13,8 @@ fun sumEvenNumbers(numbers: Array<Int>): Int {
 
     return sum
 }
+
+fun main() {
+    val a = arrayOf(1, 2, 3, 4)
+    println(sumEvenNumbers(a))
+}
