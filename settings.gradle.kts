@@ -13,7 +13,7 @@ plugins {
 rootProject.name = "faculty_day"
 include("lesson1")
 include("lesson2")
-//include("lesson3")
+include("lesson3")
 //include("lesson4")
 //include("lesson5")
 //include("lesson6")

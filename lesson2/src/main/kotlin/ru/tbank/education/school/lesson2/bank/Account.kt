@@ -31,11 +31,10 @@ class CreditAccount(
     var creditLimit = creditLimit
 
     override fun withdraw(amount: Double): Boolean {
-      if (creditLimit + balance >= amount) {
-          balance -= amount
-          return true
-      }
+        if (creditLimit + balance >= amount) {
+            balance -= amount
+            return true
+        }
         return false
     }
 }
-

@@ -12,7 +12,7 @@ class Bank {
         val newClient = Client(
             // конструкция ${clientSeq} позволяет подставлять значения прямо в строку
             "C-${clientSeq}",
-             clientFullName
+            clientFullName
         )
         clientSeq++
         clients.add(newClient)
