@@ -4,49 +4,50 @@
 Найти все строки со словом ERROR во всех логах в каталоге logs (включая logs/old) и сохранить их в файл errors.txt в корне проекта.
 
 ```bash
-TODO()
+grep -r "ERROR" logs/ > errors.txt
 ```
 
 ## Задание 2. Архивация старых логов
 Создать каталог archived/ в корне проекта и переместить туда все файлы из logs/old.
 
 ```bash
-TODO()
+mkdir -p archived
+mv logs/old/* archived/
 ```
 
 ## Задание 3. Подсчёт размера логов
 Посчитать общий размер каталога logs и записать результат в logs_size.txt.
 
 ```bash
-TODO()
+du -sb logs > logs_size.txt
 ```
 
 ## Задание 4. Нахождение самого большого лог-файла
 Найти самый большой файл в каталоге logs (без учёта подкаталогов) и записать его имя в файл biglog.txt.
 
 ```bash
-TODO()
+find logs/ -maxdepth 1 -type f -exec du -b {} + | sort -rn | head -1 | cut -f2 > biglog.txt
 ```
 
 ## Задание 5. Подсчёт количества логов
 Подсчитать количество файлов с расширением .log во всём каталоге logs и сохранить результат в log_count.txt.
 
 ```bash
-TODO()
+find logs/ -type f -name "*.logs" | wc -l > log_count.txt
 ```
 
 ## Задание 6. Поиск конфигурационных параметров
 Найти во всех config/*.conf строки, содержащие слово "host", и записать в host_params.txt.
 
 ```bash
-TODO()
+grep -i "host" config/*.conf > host_params.txt
 ```
 
 ## Задание 7. Создание резервного архива конфигов
 Создать zip-архив config_backup.zip, содержащий все файлы из config/.
 
 ```bash
-TODO()
+zip -r config_backup.zip config/
 ```
 
 ## Задание 8. Создание общего резервного архива
@@ -56,14 +57,18 @@ TODO()
 - файл errors.txt (если он есть)
 
 ```bash
-TODO()
+zip project_backup.zip \
+  config/*.conf \
+  logs/*.log \
+  logs/old/*.log \
+  errors.txt 2>/dev/null
 ```
 
 ## Задание 9. Очистка пустых строк в логах
 Создать файл cleaned_app.log, содержащий содержимое app.log без пустых строк.
 
 ```bash
-TODO()
+grep -v '^$' app.log > cleaned_app.log
 ```
 
 ## Задание 10. Подсчёт количества строк в каждом конфиге
@@ -73,7 +78,7 @@ db.conf 8
 (где число — количество строк в файле)
 
 ```bash
-TODO()
+wc -l config/*.conf | head -n -1 > conf_stats.txt
 ```
 
 
