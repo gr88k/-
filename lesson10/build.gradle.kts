@@ -1,14 +1,8 @@
 plugins {
-    buildlogic.`kotlin-common-conventions-no-detekt`
+    id("buildlogic.kotlin-library-conventions")
 }
-
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
-}
-
-tasks.test {
-    useJUnitPlatform()
+    testImplementation(kotlin("test"))
 }
 
 tasks.withType<JavaExec>().configureEach {
