@@ -1,0 +1,18 @@
+app:
+  service:
+    forbidden-names:
+      - "admin"
+      - "root"
+      - "test"
+      - "administrator"
+    max-items: 100
+    allowed-categories:
+      - "BOOKS"
+      - "ELECTRONICS"
+      - "CLOTHING"
+      - "FOOD"
+    filter-enabled: true
+
+spring:
+  application:
+    name: demo-service

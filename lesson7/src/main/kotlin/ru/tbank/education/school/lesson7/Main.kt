@@ -29,6 +29,9 @@ fun task() {
             )
         )
     )
+
+    val orders = users.flatMap{it.orders}
+    println(orders)
 }
 
 
@@ -36,6 +39,9 @@ fun task() {
 fun task2() {
     val months = listOf("Янв", "Фев", "Мар", "Апр", "Май")
     val revenue = listOf(1000, 1200, 800, 1400, 1300)
+
+    val pairs = months.zip(revenue)
+    println(pairs)
 }
 
 // Задание 3 - выведите id всех заказов, которые были доставлены и оплачены на сумму > 1000
@@ -46,6 +52,9 @@ fun task3() {
         Order(id = 3, product = "Рюкзак", amount = 1000, isPaid = true, isDelivered = true),
         Order(id = 4, product = "Кружка", amount = 500, isPaid = false, isDelivered = false)
     )
+
+    val specialOrders = orders.filter { it.isPaid && it.isDelivered && it.amount > 1000}
+    println(specialOrders)
 }
 
 
@@ -64,6 +73,10 @@ fun task4() {
         Student(name = "Галина", group = "A-03"),
         Student(name = "Денис", group = "A-02")
     )
+
+    val groups = students.groupBy {it.group}
+    println(groups)
+
 }
 
 data class ApiResponse(val code: Int, val message: String)
@@ -76,6 +89,10 @@ fun task5() {
         ApiResponse(code = 200, message = "OK"),
         ApiResponse(code = 200, message = "Cached OK")
     )
+
+    val f = responses.first {it.code == 200}
+    val l = responses.last {it.code == 500}
+    println("$f $l")
 
 }
 
@@ -90,6 +107,12 @@ fun task6() {
         Movie(title = "Тёмный рыцарь", rating = 9.1),
         Movie(title = "Мементо", rating = 8.5)
     )
+
+    val bestsellers = movies
+        .sortedByDescending { it.rating }
+        .take(3)
+
+    println(bestsellers)
 }
 
 // Задание 7 - добавить логирование операций
@@ -98,6 +121,15 @@ fun task7() {
     val subtract: (a: Int, b: Int) -> Int = { a, b -> a - b }
     val multiply: (a: Int, b: Int) -> Int = { a, b -> a * b }
 }
+
+//fun withLogs(operation: (a: Int, b: Int) -> Int)
+    //{
+   //     val newFunc: (Int, Int)
+   // }
+   // {(a, b) ->
+   //     println("Paremeters $a $b")
+   //     operation(a, b)
+  //  }
 
 
 data class Client(
@@ -109,6 +141,10 @@ data class Client(
 
 fun <A, B, C> ((A) -> B).andThen(next: (B) -> C): (A) -> C = { a -> next(this(a)) }
 
+fun trim(field: String) = field.replace(" ", "")
+fun lower(field: String) = field.lowercase()
+fun validate(field: String) = if (field.isEmpty()) null else field
+
 // Задание 8 - хочу написать функции для валидации полей
 fun task8() {
     val rawClients = listOf(
@@ -116,7 +152,12 @@ fun task8() {
         Client(name = "  Мария  ", email = "maria@mail.ru", phone = "8-800-555-35-35"),
         Client(name = " ", email = "test@", phone = "000"),
     )
+
+    val name = ""
+    val validationFunc = ::trim.andThen {::lower}.andThen{::validate}
 }
+
+
 
 // Задание 9 - просто смотрим на примеры
 fun task9() {
@@ -149,6 +190,11 @@ fun task9() {
 // Задание 10 - напишите функцию деления с использованием runCatching и Result<T>, реализуйте вывод ошибки и реузльтата
 fun task10() {
 }
+
+fun riskyOperation(x: Int, y: Int): Result<Int> =
+    runCatching{
+        x/y
+    }
 
 // Задание 11 - пример
 fun task11() {
@@ -189,4 +235,6 @@ interface Function2<in P1, in P2, out R> {
 
 
 fun main() {
+    val a = riskyOperation(4, 0)
+    println(a)
 }

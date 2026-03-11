@@ -1,0 +1,26 @@
+
+object RaceCondition {
+    var counter = 0
+
+    fun run(): Int {
+        val threads = List(10) { threadId ->
+            Thread {
+                repeat(1000) {
+                    counter++
+                }
+                println("Поток $threadId завершил работу")
+            }
+        }
+
+        threads.forEach { it.start() }
+        threads.forEach { it.join() }
+
+        return counter
+    }
+}
+
+fun main() {
+    val finalValue = RaceCondition.run()
+    println("counter: $finalValue")
+    println(10000 - finalValue)
+}
